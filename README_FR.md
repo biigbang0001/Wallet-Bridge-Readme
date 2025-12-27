@@ -1,355 +1,355 @@
-# 🌉 FIX/wFIX Bridge - Complete User Guide
+# 🌉 Bridge FIX/wFIX - Guide Utilisateur Complet
 
-## ⚡ Quick Start (TL;DR)
+## ⚡ Démarrage Rapide (TL;DR)
 
-1. **Connect wallet** (email+password or seed phrase)
-2. **Have BNB ready** (~0.01 BNB recommended for multiple operations)
-3. **WRAP**: Send FIX → Get wFIX → Trade on DEX
-4. **UNWRAP**: Burn wFIX → Get FIX back
+1. **Connectez votre wallet** (email+mot de passe ou seed phrase)
+2. **Ayez des BNB prêts** (~0.01 BNB recommandé pour plusieurs opérations)
+3. **WRAP** : Envoyez FIX → Recevez wFIX → Tradez sur les DEX
+4. **UNWRAP** : Brûlez wFIX → Récupérez vos FIX
 
-| Operation | Time | Fee |
-|-----------|------|-----|
+| Opération | Durée | Frais |
+|-----------|-------|-------|
 | WRAP (FIX → wFIX) | ~10-60 min (6 conf.) | 1% FIX + ~0.003 BNB |
-| UNWRAP (wFIX → FIX) | Faster (1 conf. to spend) | 1% wFIX + ~0.003 BNB |
-| DEX Trade | ~3 seconds | ~0.1% |
+| UNWRAP (wFIX → FIX) | Plus rapide (1 conf. pour dépenser) | 1% wFIX + ~0.003 BNB |
+| Trade sur DEX | ~3 secondes | ~0.1% |
 
 ---
 
-## 🔥 Trade wFIX on DEX
+## 🔥 Tradez wFIX sur les DEX
 
-Your wFIX can be traded instantly on PancakeSwap:
+Vos wFIX peuvent être échangés instantanément sur PancakeSwap :
 
-| Pair | Trade | Chart |
-|------|-------|-------|
+| Paire | Trader | Graphique |
+|-------|--------|-----------|
 | wFIX/BNB | [PancakeSwap](https://pancakeswap.finance/swap?outputCurrency=0xA58DF40eA9423086ec47d19673F56faB47dB9F1D) | [DexScreener](https://dexscreener.com/bsc/0x3ba18136e1c1dd24bedf022ae282b09187529704) |
 | wFIX/wBTC | [PancakeSwap](https://pancakeswap.finance/swap?outputCurrency=0xA58DF40eA9423086ec47d19673F56faB47dB9F1D) | [DexScreener](https://dexscreener.com/bsc/0xee31f8490b4304e175c41d5bcae99c47bac93026) |
 
-### 🦊 Add wFIX to MetaMask
+### 🦊 Ajouter wFIX à MetaMask
 
-Click to add wFIX token to your wallet:
+Cliquez pour ajouter le token wFIX à votre wallet :
 
-| Network | Contract Address |
-|---------|------------------|
+| Réseau | Adresse du Contrat |
+|--------|-------------------|
 | BSC (BEP-20) | `0xA58DF40eA9423086ec47d19673F56faB47dB9F1D` |
 
-**Manual setup:**
-- Network: Binance Smart Chain (BSC)
-- Token Address: `0xA58DF40eA9423086ec47d19673F56faB47dB9F1D`
-- Symbol: `wFIX`
-- Decimals: `8`
+**Configuration manuelle :**
+- Réseau : Binance Smart Chain (BSC)
+- Adresse du Token : `0xA58DF40eA9423086ec47d19673F56faB47dB9F1D`
+- Symbole : `wFIX`
+- Décimales : `8`
 
 ---
 
-## 📋 Table of Contents
-1. [What is the Bridge?](#-what-is-the-bridge)
-2. [Wallet Connection](#-wallet-connection)
-3. [Understanding Your Addresses](#-understanding-your-addresses)
-4. [WRAP: FIX → wFIX](#-wrap-fix--wfix)
-5. [UNWRAP: wFIX → FIX](#-unwrap-wfix--fix)
-6. [Transaction Tracking](#-transaction-tracking)
-7. [Detailed Fees](#-detailed-fees)
-8. [Security](#-security)
+## 📋 Table des Matières
+1. [Qu'est-ce que le Bridge ?](#-quest-ce-que-le-bridge-)
+2. [Connexion du Wallet](#-connexion-du-wallet)
+3. [Comprendre Vos Adresses](#-comprendre-vos-adresses)
+4. [WRAP : FIX → wFIX](#-wrap-fix--wfix)
+5. [UNWRAP : wFIX → FIX](#-unwrap-wfix--fix)
+6. [Suivi des Transactions](#-suivi-des-transactions)
+7. [Frais Détaillés](#-frais-détaillés)
+8. [Sécurité](#-sécurité)
 9. [FAQ](#-faq)
-10. [Troubleshooting](#-troubleshooting)
+10. [Dépannage](#-dépannage)
 
 ---
 
-## 🤔 What is the Bridge?
+## 🤔 Qu'est-ce que le Bridge ?
 
-The Bridge is a bidirectional link between two blockchains:
+Le Bridge est un lien bidirectionnel entre deux blockchains :
 
 ```
 ┌─────────────────────┐                      ┌─────────────────────┐
 │                     │        WRAP          │                     │
-│    FIX Native       │   ════════════════►  │    wFIX (BSC)       │
+│    FIX Natif        │   ════════════════►  │    wFIX (BSC)       │
 │                     │                      │                     │
-│  • FIX Blockchain   │                      │  • Binance Smart    │
+│  • Blockchain FIX   │                      │  • Binance Smart    │
 │  • SHA-256 PoW      │                      │    Chain (BEP-20)   │
-│  • 6 confirmations  │   ◄════════════════  │  • ~3 sec/block     │
-│  • Mining           │       UNWRAP         │  • Smart Contracts  │
+│  • 6 confirmations  │   ◄════════════════  │  • ~3 sec/bloc      │
+│  • Minage           │       UNWRAP         │  • Smart Contracts  │
 │                     │                      │                     │
 └─────────────────────┘                      └─────────────────────┘
 ```
 
-### Why use wFIX?
+### Pourquoi utiliser wFIX ?
 
-| Advantage | Description |
-|-----------|-------------|
-| 🔄 **DEX Trading** | Trade on PancakeSwap, 1inch, etc. |
-| 💱 **Liquidity** | Access DeFi liquidity pools |
-| ⚡ **Speed** | BSC transactions in ~3 seconds |
-| 🌐 **Ecosystem** | Use FIX in the BSC ecosystem |
-| 🔗 **Interoperability** | Combine with other BEP-20 tokens |
+| Avantage | Description |
+|----------|-------------|
+| 🔄 **Trading DEX** | Tradez sur PancakeSwap, 1inch, etc. |
+| 💱 **Liquidité** | Accédez aux pools de liquidité DeFi |
+| ⚡ **Rapidité** | Transactions BSC en ~3 secondes |
+| 🌐 **Écosystème** | Utilisez FIX dans l'écosystème BSC |
+| 🔗 **Interopérabilité** | Combinez avec d'autres tokens BEP-20 |
 
-### How does it work?
+### Comment ça fonctionne ?
 
-**WRAP (FIX → wFIX):**
-1. You pay the bridge fee (~0.003 BNB)
-2. You send your FIX to the bridge address
-3. The bridge verifies the transaction (6 confirmations)
-4. The daemon mints equivalent wFIX on BSC
-5. The wFIX arrives at your BSC address
+**WRAP (FIX → wFIX) :**
+1. Vous payez les frais du bridge (~0.003 BNB)
+2. Vous envoyez vos FIX à l'adresse du bridge
+3. Le bridge vérifie la transaction (6 confirmations)
+4. Le daemon mint des wFIX équivalents sur BSC
+5. Les wFIX arrivent à votre adresse BSC
 
-**UNWRAP (wFIX → FIX):**
-1. You pay the bridge fee (~0.003 BNB)
-2. You burn your wFIX via the smart contract
-3. The bridge detects the burn
-4. The daemon sends native FIX from its reserve
-5. After 6 FIX confirmations, the unwrap is complete
-
----
-
-## 🔐 Wallet Connection
-
-The wallet supports several import methods. **No data is stored on our servers.**
-
-### Supported import methods:
-
-| Method | Format | Example |
-|--------|--------|---------|
-| 📧 Email + Password | Local derivation | `email@example.com` + `Password` |
-| 🔑 Seed Phrase | 12 or 24 BIP-39 words | `word1 word2 word3...` |
-| 🔐 Extended Private Key | xprv... | `xprv9s21ZrQH143K...` |
-| 🔐 Private Key WIF | Base58 | `KwDiBf89QgGb...` |
-| 🔐 Private Key HEX | 64 hex characters | `e8f32e723decf...` |
-
-### Wallet creation:
-
-The wallet can only **create**:
-- **24-word Seed** (256 bits of entropy)
-- **xprv** (Extended Private Key)
+**UNWRAP (wFIX → FIX) :**
+1. Vous payez les frais du bridge (~0.003 BNB)
+2. Vous brûlez vos wFIX via le smart contract
+3. Le bridge détecte le burn
+4. Le daemon envoie des FIX natifs depuis sa réserve
+5. Après 6 confirmations FIX, l'unwrap est complet
 
 ---
 
-### 📧 Option 1: Email + Password (Recommended)
+## 🔐 Connexion du Wallet
+
+Le wallet supporte plusieurs méthodes d'import. **Aucune donnée n'est stockée sur nos serveurs.**
+
+### Méthodes d'import supportées :
+
+| Méthode | Format | Exemple |
+|---------|--------|---------|
+| 📧 Email + Mot de passe | Dérivation locale | `email@example.com` + `MotDePasse` |
+| 🔑 Seed Phrase | 12 ou 24 mots BIP-39 | `mot1 mot2 mot3...` |
+| 🔐 Clé Privée Étendue | xprv... | `xprv9s21ZrQH143K...` |
+| 🔐 Clé Privée WIF | Base58 | `KwDiBf89QgGb...` |
+| 🔐 Clé Privée HEX | 64 caractères hex | `e8f32e723decf...` |
+
+### Création de wallet :
+
+Le wallet peut uniquement **créer** :
+- **Seed 24 mots** (256 bits d'entropie)
+- **xprv** (Clé Privée Étendue)
+
+---
+
+### 📧 Option 1 : Email + Mot de passe (Recommandé)
 
 ```
 ┌────────────────────────────────────────────────────────────────┐
 │  📧 Email                                                      │
 │  ┌──────────────────────────────────────────────────────────┐  │
-│  │ your.email@example.com                                   │  │
+│  │ votre.email@example.com                                  │  │
 │  └──────────────────────────────────────────────────────────┘  │
 │                                                                │
-│  🔒 Password                                                   │
+│  🔒 Mot de passe                                               │
 │  ┌──────────────────────────────────────────────────────────┐  │
 │  │ ••••••••••••••••                                         │  │
 │  └──────────────────────────────────────────────────────────┘  │
 │                                                                │
-│              [🔓 Sign In]                                      │
+│              [🔓 Se Connecter]                                 │
 └────────────────────────────────────────────────────────────────┘
 ```
 
-#### ⚠️ IMPORTANT - How it works:
+#### ⚠️ IMPORTANT - Comment ça fonctionne :
 
-**🔐 100% local cryptographic derivation:**
+**🔐 Dérivation cryptographique 100% locale :**
 ```
-Email + Password
+Email + Mot de passe
         │
         ▼
 ┌───────────────────────────────────────────────────────────────┐
 │  PBKDF2-SHA256                                                │
-│  200,000 iterations                                           │
-│  Executed ONLY in your browser                                │
+│  200 000 itérations                                           │
+│  Exécuté UNIQUEMENT dans votre navigateur                     │
 │                                                               │
-│  ⚠️  NO DATA IS SENT TO THE SERVER                            │
-│  ⚠️  THE SERVER STORES NOTHING                                │
-│  ⚠️  WE CANNOT RECOVER YOUR WALLET                            │
+│  ⚠️  AUCUNE DONNÉE N'EST ENVOYÉE AU SERVEUR                   │
+│  ⚠️  LE SERVEUR NE STOCKE RIEN                                │
+│  ⚠️  NOUS NE POUVONS PAS RÉCUPÉRER VOTRE WALLET               │
 └───────────────────────────────────────────────────────────────┘
         │
         ▼
-   256-bit Seed
+   Seed 256 bits
         │
         ▼
-   Private Keys + Addresses
+   Clés Privées + Adresses
 ```
 
-#### 🛡️ Critical security points:
+#### 🛡️ Points de sécurité critiques :
 
-| ✅ True | ❌ False |
-|---------|----------|
-| 100% local calculation in your browser | ~~The server stores your password~~ |
-| No data sent to server | ~~We can recover your account~~ |
-| Same email+password = Same wallet, always | ~~You can reset the password~~ |
-| Works offline once loaded | ~~We have access to your funds~~ |
+| ✅ Vrai | ❌ Faux |
+|---------|--------|
+| Calcul 100% local dans votre navigateur | ~~Le serveur stocke votre mot de passe~~ |
+| Aucune donnée envoyée au serveur | ~~Nous pouvons récupérer votre compte~~ |
+| Même email+mdp = Même wallet, toujours | ~~Vous pouvez réinitialiser le mot de passe~~ |
+| Fonctionne hors ligne une fois chargé | ~~Nous avons accès à vos fonds~~ |
 
-#### ⚡ WARNING: Every character matters!
+#### ⚡ ATTENTION : Chaque caractère compte !
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  "MyEmail@gmail.com" + "Password123"                            │
+│  "MonEmail@gmail.com" + "MotDePasse123"                         │
 │         ≠                                                       │
-│  "myemail@gmail.com" + "Password123"  ← DIFFERENT wallet!       │
+│  "monemail@gmail.com" + "MotDePasse123"  ← Wallet DIFFÉRENT !   │
 │         ≠                                                       │
-│  "MyEmail@gmail.com" + "password123"  ← DIFFERENT wallet!       │
+│  "MonEmail@gmail.com" + "motdepasse123"  ← Wallet DIFFÉRENT !   │
 │         ≠                                                       │
-│  "MyEmail@gmail.com " + "Password123" ← Space = DIFFERENT!      │
+│  "MonEmail@gmail.com " + "MotDePasse123" ← Espace = DIFFÉRENT ! │
 │         ≠                                                       │
-│  "MyEmail@gmail.com" + "Password123 " ← Space = DIFFERENT!      │
+│  "MonEmail@gmail.com" + "MotDePasse123 " ← Espace = DIFFÉRENT ! │
 │                                                                 │
-│  The slightest difference (uppercase, space, accent) generates  │
-│  a COMPLETELY DIFFERENT wallet with different addresses!        │
+│  La moindre différence (majuscule, espace, accent) génère       │
+│  un wallet COMPLÈTEMENT DIFFÉRENT avec des adresses différentes!│
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#### 📝 Best practices:
+#### 📝 Bonnes pratiques :
 
-1. **Write down EXACTLY** your email and password (uppercase, spaces, accents)
-2. **Test** with a small amount first
-3. **Use a strong password** (16+ characters, symbols, numbers)
-4. **Never share** your credentials
-5. **Make multiple copies** stored in different safe places
+1. **Notez EXACTEMENT** votre email et mot de passe (majuscules, espaces, accents)
+2. **Testez** d'abord avec un petit montant
+3. **Utilisez un mot de passe fort** (16+ caractères, symboles, chiffres)
+4. **Ne partagez jamais** vos identifiants
+5. **Faites plusieurs copies** stockées dans différents endroits sûrs
 
-#### ❓ Can I recover my wallet if I forget?
+#### ❓ Puis-je récupérer mon wallet si j'oublie ?
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  ❌  NO - THERE IS NO "FORGOT PASSWORD"                         │
+│  ❌  NON - IL N'Y A PAS DE "MOT DE PASSE OUBLIÉ"                │
 │                                                                 │
-│  Why?                                                           │
-│  • No server stores your data                                   │
-│  • The derivation is one-way (irreversible)                     │
-│  • Only the EXACT email + password combination can regenerate   │
-│    your wallet                                                  │
+│  Pourquoi ?                                                     │
+│  • Aucun serveur ne stocke vos données                          │
+│  • La dérivation est à sens unique (irréversible)               │
+│  • Seule la combinaison EXACTE email + mot de passe peut        │
+│    régénérer votre wallet                                       │
 │                                                                 │
-│  💡 Tip: Also write down your seed phrase (24 words) after      │
-│     the first connection as a backup!                           │
+│  💡 Conseil : Notez aussi votre seed phrase (24 mots) après     │
+│     la première connexion comme sauvegarde !                    │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-### 🔑 Option 2: Seed Phrase (12 or 24 words)
+### 🔑 Option 2 : Seed Phrase (12 ou 24 mots)
 
 ```
 ┌────────────────────────────────────────────────────────────────┐
 │  🔑 Seed Phrase                                                │
 │  ┌──────────────────────────────────────────────────────────┐  │
-│  │ word1 word2 word3 word4 word5 word6                      │  │
-│  │ word7 word8 word9 word10 word11 word12                   │  │
-│  │ [... up to 24 words if applicable]                       │  │
+│  │ mot1 mot2 mot3 mot4 mot5 mot6                            │  │
+│  │ mot7 mot8 mot9 mot10 mot11 mot12                         │  │
+│  │ [... jusqu'à 24 mots si applicable]                      │  │
 │  └──────────────────────────────────────────────────────────┘  │
 │                                                                │
-│              [📥 Import]                                       │
+│              [📥 Importer]                                     │
 └────────────────────────────────────────────────────────────────┘
 ```
 
-#### How it works:
+#### Comment ça fonctionne :
 
 ```
-12 or 24 words (BIP-39)
+12 ou 24 mots (BIP-39)
         │
         ▼
 ┌───────────────────────────────────┐
-│  HD Derivation (BIP-32/44/84/86)  │
-│  Bitcoin compatible standard      │
+│  Dérivation HD (BIP-32/44/84/86)  │
+│  Standard compatible Bitcoin      │
 └───────────────────────────────────┘
         │
         ▼
-   Master Key (xprv)
+   Clé Maître (xprv)
         │
-        ├──► Bech32 Address   (m/84'/0'/0'/0/0) ← Bech32 automatically spends Legacy & P2SH UTXOs owned by the HD account
-        ├──► Taproot Address  (m/86'/0'/0'/0/0)
-        └──► BSC Address      (m/44'/60'/0'/0/0)
+        ├──► Adresse Bech32   (m/84'/0'/0'/0/0) ← Bech32 consomme automatiquement les UTXOs Legacy et P2SH possédés sur le compte HD
+        ├──► Adresse Taproot  (m/86'/0'/0'/0/0)
+        └──► Adresse BSC      (m/44'/60'/0'/0/0)
 ```
 
-#### ⚠️ Important points:
+#### ⚠️ Points importants :
 
-- **Compatible** with other HD wallets (Electrum, Ledger, etc.)
-- **12 words** = 128 bits of entropy
-- **24 words** = 256 bits of entropy (default creation)
-- **Word order matters**!
+- **Compatible** avec d'autres wallets HD (Electrum, Ledger, etc.)
+- **12 mots** = 128 bits d'entropie
+- **24 mots** = 256 bits d'entropie (création par défaut)
+- **L'ordre des mots compte** !
 
-#### 🛡️ Seed security:
+#### 🛡️ Sécurité du seed :
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  ⚠️  YOUR SEED = YOUR FUNDS                                     │
+│  ⚠️  VOTRE SEED = VOS FONDS                                     │
 │                                                                 │
-│  • NEVER photograph it                                          │
-│  • NEVER store it online (cloud, email, etc.)                   │
-│  • NEVER type it on an unknown website                          │
-│  • Write it on PAPER, store in a safe place                     │
-│  • Make 2-3 copies in DIFFERENT locations                       │
+│  • Ne le photographiez JAMAIS                                   │
+│  • Ne le stockez JAMAIS en ligne (cloud, email, etc.)           │
+│  • Ne le tapez JAMAIS sur un site inconnu                       │
+│  • Écrivez-le sur PAPIER, stockez dans un endroit sûr           │
+│  • Faites 2-3 copies dans des endroits DIFFÉRENTS               │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-### 🔐 Option 3: Private Key (WIF, HEX or xprv)
+### 🔐 Option 3 : Clé Privée (WIF, HEX ou xprv)
 
 ```
 ┌────────────────────────────────────────────────────────────────┐
-│  🔐 Private Key                                                │
+│  🔐 Clé Privée                                                 │
 │  ┌──────────────────────────────────────────────────────────┐  │
-│  │ [WIF, HEX or xprv]                                       │  │
+│  │ [WIF, HEX ou xprv]                                       │  │
 │  └──────────────────────────────────────────────────────────┘  │
 │                                                                │
-│              [📥 Import]                                       │
+│              [📥 Importer]                                     │
 └────────────────────────────────────────────────────────────────┘
 ```
 
-#### Accepted formats:
+#### Formats acceptés :
 
-| Format | Example | Characteristics |
-|--------|---------|-----------------|
-| **WIF** | `KwDiBf89QgGb...` | 51-52 characters, Base58 |
-| **HEX** | `e8f32e723dec...` | 64 hexadecimal characters |
-| **xprv** | `xprv9s21ZrQH...` | Extended Private Key, full HD |
+| Format | Exemple | Caractéristiques |
+|--------|---------|------------------|
+| **WIF** | `KwDiBf89QgGb...` | 51-52 caractères, Base58 |
+| **HEX** | `e8f32e723dec...` | 64 caractères hexadécimaux |
+| **xprv** | `xprv9s21ZrQH...` | Clé Privée Étendue, HD complet |
 
-#### Differences:
+#### Différences :
 
-| Type | Generated addresses | HD? | BSC Access? |
-|------|---------------------|-----|-------------|
-| WIF / HEX | Single FIX address only | No | ❌ No |
-| xprv | All addresses (Bech32, Taproot, BSC) | Yes ✅ | ✅ Yes |
+| Type | Adresses générées | HD ? | Accès BSC ? |
+|------|-------------------|------|-------------|
+| WIF / HEX | Une seule adresse FIX | Non | ❌ Non |
+| xprv | Toutes les adresses (Bech32, Taproot, BSC) | Oui ✅ | ✅ Oui |
 
-> ⚠️ **Important:** WIF and HEX private keys only work for the FIX blockchain. To access your BSC address (for wFIX), you **must** use an HD method: Email+Password, Seed Phrase, or xprv.
+> ⚠️ **Important :** Les clés privées WIF et HEX fonctionnent uniquement pour la blockchain FIX. Pour accéder à votre adresse BSC (pour wFIX), vous **devez** utiliser une méthode HD : Email+Mot de passe, Seed Phrase, ou xprv.
 
 ---
 
-## 🏠 Understanding Your Addresses
+## 🏠 Comprendre Vos Adresses
 
-After connecting with an HD method (email, seed, xprv), you have access to **3 main addresses**:
+Après connexion avec une méthode HD (email, seed, xprv), vous avez accès à **3 adresses principales** :
 
 ```
 ┌────────────────────────────────────────────────────────────────┐
-│  === YOUR ADDRESSES ===                                        │
+│  === VOS ADRESSES ===                                          │
 │                                                                │
-│  📍 Bech32 (Native SegWit):                                    │
+│  📍 Bech32 (Native SegWit) :                                   │
 │     fix1qxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx              📋    │
-│     └─ Main address for FIX                                    │
+│     └─ Adresse principale pour FIX                             │
 │                                                                │
-│  📍 Taproot (Bech32m):                                         │
+│  📍 Taproot (Bech32m) :                                        │
 │     fix1pxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx      📋    │
-│     └─ New generation, slightly lower fees                     │
+│     └─ Nouvelle génération, frais légèrement réduits           │
 │                                                                │
-│  📍 BSC (wFIX):                                                │
+│  📍 BSC (wFIX) :                                               │
 │     0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX           📋    │
-│     └─ Your address on Binance Smart Chain                     │
+│     └─ Votre adresse sur Binance Smart Chain                   │
 │                                                                │
 └────────────────────────────────────────────────────────────────┘
 ```
 
-### Note on legacy formats (Legacy, P2SH):
+### Note sur les formats legacy (Legacy, P2SH) :
 
-> If you have UTXOs on Legacy or P2SH addresses, they will be automatically spent via your Bech32 address. The wallet handles this transparently.
+> Si vous avez des UTXOs sur des adresses Legacy ou P2SH, ils seront automatiquement dépensés via votre adresse Bech32. Le wallet gère cela de manière transparente.
 
-### Which address to use?
+### Quelle adresse utiliser ?
 
-| Usage | Recommended address |
+| Usage | Adresse recommandée |
 |-------|---------------------|
-| Receive FIX | **Bech32** |
-| Bridge WRAP | **Bech32** or **Taproot** |
-| Receive wFIX | **BSC (0x...)** |
+| Recevoir FIX | **Bech32** |
+| Bridge WRAP | **Bech32** ou **Taproot** |
+| Recevoir wFIX | **BSC (0x...)** |
 
-### 📋 Copy Button
+### 📋 Bouton Copier
 
-Click **📋** to copy an address:
+Cliquez sur **📋** pour copier une adresse :
 
 ```
 ┌────────────────────────────────────┐
@@ -357,32 +357,32 @@ Click **📋** to copy an address:
 │                       │            │
 │                       ▼            │
 │              ┌─────────────────┐   │
-│              │ ✅ Copied!      │   │
+│              │ ✅ Copié !      │   │
 │              └─────────────────┘   │
 └────────────────────────────────────┘
 ```
 
 ---
 
-## 🔵 WRAP: FIX → wFIX
+## 🔵 WRAP : FIX → wFIX
 
-**Convert your native FIX to wFIX on Binance Smart Chain**
+**Convertissez vos FIX natifs en wFIX sur Binance Smart Chain**
 
-### Process overview:
+### Aperçu du processus :
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│   YOUR WALLET               BRIDGE                BSC           │
-│   ───────────              ────────              ───            │
+│   VOTRE WALLET              BRIDGE                BSC           │
+│   ────────────              ──────               ───            │
 │                                                                 │
-│   ┌─────────┐    Step 1    ┌─────────┐                          │
-│   │   BNB   │ ──────────►  │  Master │  (Bridge fee)            │
+│   ┌─────────┐    Étape 1   ┌─────────┐                          │
+│   │   BNB   │ ──────────►  │  Master │  (Frais bridge)          │
 │   │ 0.003   │              │ Address │                          │
 │   └─────────┘              └─────────┘                          │
 │                                                                 │
-│   ┌─────────┐    Step 2    ┌─────────┐                          │
-│   │   FIX   │ ──────────►  │  Bridge │  (Locked)                │
+│   ┌─────────┐    Étape 2   ┌─────────┐                          │
+│   │   FIX   │ ──────────►  │  Bridge │  (Verrouillés)           │
 │   └─────────┘              │ Address │                          │
 │                            └─────────┘                          │
 │                                 │                               │
@@ -390,15 +390,15 @@ Click **📋** to copy an address:
 │                                 ▼                               │
 │                            ┌─────────┐         ┌─────────┐      │
 │                            │  Daemon │ ──────► │  wFIX   │      │
-│                            │  (Mint) │         │  (You)  │      │
+│                            │  (Mint) │         │  (Vous) │      │
 │                            └─────────┘         └─────────┘      │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Detailed steps:
+### Étapes détaillées :
 
-#### Step 1: Select WRAP mode
+#### Étape 1 : Sélectionnez le mode WRAP
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -406,17 +406,17 @@ Click **📋** to copy an address:
 │   ┌──────────────────────┐    ┌──────────────────────┐          │
 │   │  🔵 FIX → wFIX       │    │  🟡 wFIX → FIX       │          │
 │   │  ════════════════    │    │                      │          │
-│   │       ✓ ACTIVE       │    │                      │          │
+│   │       ✓ ACTIF        │    │                      │          │
 │   └──────────────────────┘    └──────────────────────┘          │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#### Step 2: Choose source FIX address
+#### Étape 2 : Choisissez l'adresse FIX source
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  From (FIX):                                                    │
+│  De (FIX) :                                                     │
 │  ┌────────────────────────────────────────────────────────┐     │
 │  │  Bech32                                            ▼   │     │
 │  ├────────────────────────────────────────────────────────┤     │
@@ -424,154 +424,154 @@ Click **📋** to copy an address:
 │  │  ○ Taproot  - fix1p... (XX.XX FIX)                     │     │
 │  └────────────────────────────────────────────────────────┘     │
 │                                                                 │
-│  💡 Choose the address containing the FIX to convert            │
+│  💡 Choisissez l'adresse contenant les FIX à convertir          │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-**Bech32 vs Taproot difference:**
+**Différence Bech32 vs Taproot :**
 
-| Characteristic | Bech32 | Taproot |
-|----------------|--------|---------|
-| Prefix | `fix1q...` | `fix1p...` |
+| Caractéristique | Bech32 | Taproot |
+|-----------------|--------|---------|
+| Préfixe | `fix1q...` | `fix1p...` |
 | Type | Native SegWit (P2WPKH) | P2TR |
-| TX fees | ~68 vbytes/input | ~58 vbytes/input |
+| Frais TX | ~68 vbytes/input | ~58 vbytes/input |
 
-#### Step 3: Enter destination BSC address
+#### Étape 3 : Entrez l'adresse BSC de destination
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  To (BSC address):                                              │
+│  Vers (adresse BSC) :                                           │
 │  ┌────────────────────────────────────────────────────────┐     │
 │  │  0x...                                                 │     │
 │  └────────────────────────────────────────────────────────┘     │
 │                                                                 │
-│  💡 This is where your wFIX will be sent                        │
-│     Click 📋 to copy your BSC address                           │
+│  💡 C'est là que vos wFIX seront envoyés                        │
+│     Cliquez 📋 pour copier votre adresse BSC                    │
 │                                                                 │
-│  ⚠️  VERIFY THE ADDRESS! Transactions are irreversible.         │
-│      A mistake = lost funds.                                    │
+│  ⚠️  VÉRIFIEZ L'ADRESSE ! Les transactions sont irréversibles.  │
+│      Une erreur = fonds perdus.                                 │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#### Step 4: Enter amount
+#### Étape 4 : Entrez le montant
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  Amount (FIX):                                                  │
+│  Montant (FIX) :                                                │
 │  ┌───────────────────────────────────────────────────┐  ┌─────┐ │
 │  │  XX.XXXXXXXX                                      │  │ MAX │ │
 │  └───────────────────────────────────────────────────┘  └─────┘ │
 │                                                                 │
-│  You receive: ~XX.XXXXXXXX wFIX (- 1% fee)                      │
+│  Vous recevez : ~XX.XXXXXXXX wFIX (- 1% frais)                  │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-**The MAX button:**
+**Le bouton MAX :**
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  🔘 MAX - Automatically calculates the maximum amount           │
+│  🔘 MAX - Calcule automatiquement le montant maximum            │
 │                                                                 │
-│  The calculation takes into account:                            │
-│  ├─ All your available UTXOs                                    │
-│  ├─ FIX network fees                                            │
-│  ├─ The OP_RETURN output (encoded BSC address)                  │
-│  └─ Estimated transaction size                                  │
+│  Le calcul prend en compte :                                    │
+│  ├─ Tous vos UTXOs disponibles                                  │
+│  ├─ Les frais réseau FIX                                        │
+│  ├─ L'output OP_RETURN (adresse BSC encodée)                    │
+│  └─ La taille estimée de la transaction                         │
 │                                                                 │
-│  💡 Use MAX to avoid "Insufficient funds" errors                │
+│  💡 Utilisez MAX pour éviter les erreurs "Fonds insuffisants"   │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#### Step 5: Prepare transaction
+#### Étape 5 : Préparez la transaction
 
-Click **"🚀 PREPARE WRAP"**
+Cliquez sur **"🚀 PRÉPARER WRAP"**
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  STEP 1/2: PAY BRIDGE FEE                                       │
-│  ━━━━━━━━━━━━━━━━━━━━━━━━━━                                      │
-│  Send: ~0.003 BNB (bridge fee)                                   │
-│  To: Bridge master address                                      │
+│  ÉTAPE 1/2 : PAYER LES FRAIS BRIDGE                             │
+│  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━                               │
+│  Envoyer : ~0.003 BNB (frais bridge)                             │
+│  Vers : Adresse master du bridge                                │
 │                                                                 │
-│  STEP 2/2: SEND FIX TO BRIDGE                                   │
-│  ━━━━━━━━━━━━━━━━━━━━━━━━━━                                      │
-│  Send: XX.XXXXXXXX FIX                                          │
-│  To: Bridge deposit address                                     │
-│  OP_RETURN: [Your encoded BSC address]                          │
-│  Fee (1%): X.XXXXXXXX FIX                                       │
-│  You receive: ~XX.XXXXXXXX wFIX                                 │
+│  ÉTAPE 2/2 : ENVOYER FIX AU BRIDGE                              │
+│  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━                                │
+│  Envoyer : XX.XXXXXXXX FIX                                      │
+│  Vers : Adresse de dépôt du bridge                              │
+│  OP_RETURN : [Votre adresse BSC encodée]                        │
+│  Frais (1%) : X.XXXXXXXX FIX                                    │
+│  Vous recevez : ~XX.XXXXXXXX wFIX                               │
 │                                                                 │
-│                  [💰 Pay Fees (Step 1)]                         │
+│                  [💰 Payer les Frais (Étape 1)]                 │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-**What is OP_RETURN?**
+**Qu'est-ce que OP_RETURN ?**
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  OP_RETURN = Data embedded in the FIX transaction               │
+│  OP_RETURN = Données intégrées dans la transaction FIX          │
 │                                                                 │
-│  Contains: Your destination BSC address                         │
-│  Purpose: The daemon knows where to send your wFIX              │
-│  Size: ~45 bytes                                                │
+│  Contient : Votre adresse BSC de destination                    │
+│  But : Le daemon sait où envoyer vos wFIX                       │
+│  Taille : ~45 bytes                                             │
 │                                                                 │
-│  Without OP_RETURN, the daemon wouldn't know which BSC          │
-│  address to credit!                                             │
+│  Sans OP_RETURN, le daemon ne saurait pas quelle adresse        │
+│  BSC créditer !                                                 │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#### Step 6: Pay BNB bridge fee
+#### Étape 6 : Payez les frais BNB
 
-Click **"💰 Pay Fees (Step 1)"**
+Cliquez sur **"💰 Payer les Frais (Étape 1)"**
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  BNB transaction in progress...                                 │
+│  Transaction BNB en cours...                                    │
 │                                                                 │
-│  ✅ Bridge fee paid successfully!                               │
-│  TX: 0x...                                                      │
+│  ✅ Frais bridge payés avec succès !                            │
+│  TX : 0x...                                                     │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#### Step 7: Send FIX
+#### Étape 7 : Envoyez les FIX
 
-Click **"📤 Send FIX (Step 2)"**
+Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  FIX transaction in progress...                                 │
+│  Transaction FIX en cours...                                    │
 │                                                                 │
-│  ✅ Wrap initiated!                                             │
-│  TX: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx           │
+│  ✅ Wrap initié !                                               │
+│  TX : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx          │
 │                                                                 │
-│  ⏳ Waiting for 6 confirmations on FIX blockchain...            │
+│  ⏳ En attente de 6 confirmations sur la blockchain FIX...      │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#### Step 8: Wait for confirmations
+#### Étape 8 : Attendez les confirmations
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  📋 Pending Bridges                                       [🔄]  │
+│  📋 Bridges en Attente                                    [🔄]  │
 │                                                                 │
 │  🔵 FIX → wFIX                                                  │
 │                                                                 │
 │  ┌───────────────────────────────────────────────────────────┐  │
 │  │  📝 xxxxxxxx...                                    ⬜ 3/6   │  │
 │  │     XX.XXXXXXXX FIX → wFIX                                │  │
-│  │     🔄 Confirming on FIX blockchain                       │  │
+│  │     🔄 Confirmation sur blockchain FIX                    │  │
 │  │                                                           │  │
 │  │     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  50%                   │  │
 │  └───────────────────────────────────────────────────────────┘  │
@@ -579,19 +579,19 @@ Click **"📤 Send FIX (Step 2)"**
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-**Why 6 confirmations?**
+**Pourquoi 6 confirmations ?**
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  The bridge waits for 6 confirmations to ensure the             │
-│  transaction is final and irreversible.                         │
+│  Le bridge attend 6 confirmations pour s'assurer que la         │
+│  transaction est finale et irréversible.                        │
 │                                                                 │
-│  ⚠️ FIX is a SHA-256 blockchain (like Bitcoin).                 │
-│     Time between blocks VARIES based on network hashrate.       │
-│     It is NOT a fixed time.                                     │
+│  ⚠️ FIX est une blockchain SHA-256 (comme Bitcoin).             │
+│     Le temps entre les blocs VARIE selon le hashrate réseau.    │
+│     Ce n'est PAS un temps fixe.                                 │
 │                                                                 │
-│  On average: ~10-60 minutes depending on network                │
+│  En moyenne : ~10-60 minutes selon le réseau                    │
 │                                                                 │
 │  Confirmation 0/6 → 1/6 → 2/6 → 3/6 → 4/6 → 5/6 → 6/6 → ✅ MINT │
 │                                                                 │
@@ -600,128 +600,128 @@ Click **"📤 Send FIX (Step 2)"**
 
 ---
 
-## 🟡 UNWRAP: wFIX → FIX
+## 🟡 UNWRAP : wFIX → FIX
 
-**Convert your wFIX to native FIX**
+**Convertissez vos wFIX en FIX natifs**
 
-### Overview:
+### Aperçu :
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│   YOUR WALLET               BRIDGE                FIX           │
-│   ───────────              ────────              ───            │
+│   VOTRE WALLET              BRIDGE                FIX           │
+│   ────────────              ──────               ───            │
 │                                                                 │
-│   ┌─────────┐    Step 1    ┌─────────┐                          │
-│   │   BNB   │ ──────────►  │  Master │  (Bridge fee)            │
+│   ┌─────────┐    Étape 1   ┌─────────┐                          │
+│   │   BNB   │ ──────────►  │  Master │  (Frais bridge)          │
 │   │ 0.003   │              │ Address │                          │
 │   └─────────┘              └─────────┘                          │
 │                                                                 │
-│   ┌─────────┐    Step 2    ┌─────────┐                          │
-│   │  wFIX   │ ──────────►  │  Burn   │  (wFIX destroyed)        │
+│   ┌─────────┐    Étape 2   ┌─────────┐                          │
+│   │  wFIX   │ ──────────►  │  Burn   │  (wFIX détruits)         │
 │   └─────────┘              │ Contract│                          │
 │                            └─────────┘                          │
 │                                 │                               │
-│                                 │ Burn detection                │
+│                                 │ Détection du burn             │
 │                                 ▼                               │
 │                            ┌─────────┐         ┌─────────┐      │
 │                            │  Daemon │ ──────► │   FIX   │      │
-│                            │ (Send)  │         │  (You)  │      │
+│                            │ (Envoi) │         │  (Vous) │      │
 │                            └─────────┘         └─────────┘      │
 │                                 │                               │
 │                                 │ 6 confirmations               │
 │                                 ▼                               │
 │                            ┌─────────┐                          │
-│                            │    ✅   │  Complete!               │
+│                            │    ✅   │  Terminé !               │
 │                            └─────────┘                          │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Steps:
+### Étapes :
 
-#### 1. Select UNWRAP mode
+#### 1. Sélectionnez le mode UNWRAP
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │   ┌──────────────────────┐    ┌──────────────────────┐          │
 │   │  🔵 FIX → wFIX       │    │  🟡 wFIX → FIX       │          │
 │   │                      │    │  ════════════════    │          │
-│   │                      │    │       ✓ ACTIVE       │          │
+│   │                      │    │       ✓ ACTIF        │          │
 │   └──────────────────────┘    └──────────────────────┘          │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#### 2. Choose destination FIX address
+#### 2. Choisissez l'adresse FIX de destination
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  To (FIX):                                                      │
+│  Vers (FIX) :                                                   │
 │  ┌────────────────────────────────────────────────────────┐     │
 │  │  Bech32                                            ▼   │     │
 │  └────────────────────────────────────────────────────────┘     │
 │                                                                 │
-│  💡 Your native FIX will be sent to this address                │
+│  💡 Vos FIX natifs seront envoyés à cette adresse               │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#### 3. Enter wFIX amount to convert
+#### 3. Entrez le montant de wFIX à convertir
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  Amount (wFIX):                                                 │
+│  Montant (wFIX) :                                               │
 │  ┌───────────────────────────────────────────────────┐  ┌─────┐ │
 │  │  X.XXXXXXXX                                       │  │ MAX │ │
 │  └───────────────────────────────────────────────────┘  └─────┘ │
 │                                                                 │
-│  You receive: ~X.XXXXXXXX FIX (- 1% fee)                        │
+│  Vous recevez : ~X.XXXXXXXX FIX (- 1% frais)                    │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#### 4. Prepare and confirm
+#### 4. Préparez et confirmez
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  UNWRAP SUMMARY                                                 │
-│  ━━━━━━━━━━━━━━                                                 │
+│  RÉSUMÉ UNWRAP                                                  │
+│  ━━━━━━━━━━━━━                                                  │
 │                                                                 │
-│  Bridge fee: ~0.003 BNB                                          │
-│  Burn: X.XXXXXXXX wFIX                                          │
-│  Fee (1%): X.XXXXXXXX wFIX                                      │
+│  Frais bridge : ~0.003 BNB                                       │
+│  Burn : X.XXXXXXXX wFIX                                         │
+│  Frais (1%) : X.XXXXXXXX wFIX                                   │
 │  ─────────────────────                                          │
-│  You receive: ~X.XXXXXXXX FIX                                   │
-│  To: fix1q...                                                   │
+│  Vous recevez : ~X.XXXXXXXX FIX                                 │
+│  Vers : fix1q...                                                │
 │                                                                 │
-│                  [💰 Pay Fees + 🔥 Burn wFIX]                   │
+│                  [💰 Payer Frais + 🔥 Burn wFIX]                │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#### 5. Burn transaction
+#### 5. Transaction de burn
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  ✅ Burn complete!                                              │
-│  TX: 0x...                                                      │
+│  ✅ Burn terminé !                                              │
+│  TX : 0x...                                                     │
 │                                                                 │
-│  ⏳ The daemon will send your FIX shortly...                    │
-│     Then wait for 6 FIX confirmations.                          │
+│  ⏳ Le daemon va envoyer vos FIX sous peu...                    │
+│     Puis attendez 6 confirmations FIX.                          │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 📊 Transaction Tracking
+## 📊 Suivi des Transactions
 
-### "Pending Bridges" section
+### Section "Bridges en Attente"
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  📋 Pending Bridges                                       [🔄]  │
+│  📋 Bridges en Attente                                    [🔄]  │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
 │  🔵 FIX → wFIX (WRAP)                                           │
@@ -730,7 +730,7 @@ Click **"📤 Send FIX (Step 2)"**
 │  ┌───────────────────────────────────────────────────────────┐  │
 │  │  📝 xxxxxxxx...                                    ⬜ 4/6   │  │
 │  │     XX.XX FIX → wFIX                                      │  │
-│  │     🔄 Confirming on FIX blockchain                       │  │
+│  │     🔄 Confirmation sur blockchain FIX                    │  │
 │  └───────────────────────────────────────────────────────────┘  │
 │                                                                 │
 │  🟡 wFIX → FIX (UNWRAP)                                         │
@@ -739,55 +739,55 @@ Click **"📤 Send FIX (Step 2)"**
 │  ┌───────────────────────────────────────────────────────────┐  │
 │  │  📝 0x...                                          ⬜ 2/6   │  │
 │  │     X.XX wFIX → FIX                                       │  │
-│  │     🔄 Confirming on FIX blockchain                       │  │
+│  │     🔄 Confirmation sur blockchain FIX                    │  │
 │  └───────────────────────────────────────────────────────────┘  │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Transaction states:
+### États des transactions :
 
-| State | Icon | Description |
-|-------|------|-------------|
-| Mempool | ⬜ 0/6 | TX sent, not yet mined |
-| Confirming | ⬜ 1-5/6 | Waiting for confirmations |
-| Ready | ⬜ 6/6 | Ready for processing |
-| Processing | ⏳ | Daemon processing TX |
-| Complete | ✅ | Successfully completed |
-| Failed | ❌ | Error (see details) |
+| État | Icône | Description |
+|------|-------|-------------|
+| Mempool | ⬜ 0/6 | TX envoyée, pas encore minée |
+| En confirmation | ⬜ 1-5/6 | En attente de confirmations |
+| Prête | ⬜ 6/6 | Prête pour traitement |
+| En traitement | ⏳ | Daemon traite la TX |
+| Terminée | ✅ | Complétée avec succès |
+| Échouée | ❌ | Erreur (voir détails) |
 
 ---
 
-## 💰 Detailed Fees
+## 💰 Frais Détaillés
 
-### Fee breakdown:
+### Structure des frais :
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  💰 FEE STRUCTURE                                               │
+│  💰 STRUCTURE DES FRAIS                                         │
 │                                                                 │
 │  ┌───────────────────────────────────────────────────────────┐  │
-│  │  Bridge Fee (BNB)                                         │  │
-│  │  ─────────────────                                        │  │
-│  │  • ~0.003 BNB per operation (WRAP or UNWRAP)               │  │
-│  │  • Paid to bridge operator to cover BSC gas costs         │  │
-│  │  • Required BEFORE the transaction is processed           │  │
-│  └───────────────────────────────────────────────────────────┘  │
-│                                                                 │
-│  ┌───────────────────────────────────────────────────────────┐  │
-│  │  Bridge Fee (Token)                                       │  │
+│  │  Frais Bridge (BNB)                                       │  │
 │  │  ──────────────────                                       │  │
-│  │  • 1% of the amount transacted                            │  │
-│  │  • WRAP: 1% deducted in FIX                               │  │
-│  │  • UNWRAP: 1% deducted in wFIX                            │  │
+│  │  • ~0.003 BNB par opération (WRAP ou UNWRAP)               │  │
+│  │  • Payé à l'opérateur du bridge pour couvrir le gas BSC   │  │
+│  │  • Requis AVANT que la transaction soit traitée           │  │
 │  └───────────────────────────────────────────────────────────┘  │
 │                                                                 │
 │  ┌───────────────────────────────────────────────────────────┐  │
-│  │  Network Fees                                             │  │
+│  │  Frais Bridge (Token)                                     │  │
+│  │  ────────────────────                                     │  │
+│  │  • 1% du montant de la transaction                        │  │
+│  │  • WRAP : 1% déduit en FIX                                │  │
+│  │  • UNWRAP : 1% déduit en wFIX                             │  │
+│  └───────────────────────────────────────────────────────────┘  │
+│                                                                 │
+│  ┌───────────────────────────────────────────────────────────┐  │
+│  │  Frais Réseau                                             │  │
 │  │  ────────────                                             │  │
-│  │  • FIX network: paid by you on WRAP (minimal)             │  │
-│  │  • FIX network: paid by bridge on UNWRAP                  │  │
+│  │  • Réseau FIX : payé par vous au WRAP (minimal)           │  │
+│  │  • Réseau FIX : payé par le bridge au UNWRAP              │  │
 │  └───────────────────────────────────────────────────────────┘  │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
@@ -798,19 +798,19 @@ Click **"📤 Send FIX (Step 2)"**
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  You send:               XX.XXXXXXXX FIX                        │
+│  Vous envoyez :          XX.XXXXXXXX FIX                        │
 │                                                                 │
-│  1. FIX network fee      - a few satoshis (you pay)             │
-│     └─ Paid to FIX miners                                       │
+│  1. Frais réseau FIX     - quelques satoshis (vous payez)       │
+│     └─ Payé aux mineurs FIX                                     │
 │                                                                 │
-│  2. Bridge fee           - 1% of FIX amount                     │
-│     └─ Goes to bridge operator                                  │
+│  2. Frais bridge         - 1% du montant FIX                    │
+│     └─ Va à l'opérateur du bridge                               │
 │                                                                 │
-│  3. Bridge BNB fee       - ~0.003 BNB                            │
-│     └─ Covers BSC gas costs for minting                         │
+│  3. Frais BNB bridge     - ~0.003 BNB                            │
+│     └─ Couvre les coûts de gas BSC pour le mint                 │
 │                                                                 │
 │  ─────────────────────────────────────────                      │
-│  wFIX received:           ~XX.XX wFIX (minus 1%)                │
+│  wFIX reçus :             ~XX.XX wFIX (moins 1%)                │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -820,67 +820,67 @@ Click **"📤 Send FIX (Step 2)"**
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  You burn:               XX.XXXXXXXX wFIX                       │
+│  Vous brûlez :           XX.XXXXXXXX wFIX                       │
 │                                                                 │
-│  1. Bridge fee           - 1% of wFIX amount                    │
-│     └─ Deducted from amount sent                                │
+│  1. Frais bridge         - 1% du montant wFIX                   │
+│     └─ Déduit du montant envoyé                                 │
 │                                                                 │
-│  2. Bridge BNB fee       - ~0.003 BNB                            │
-│     └─ Covers processing costs                                  │
+│  2. Frais BNB bridge     - ~0.003 BNB                            │
+│     └─ Couvre les coûts de traitement                           │
 │                                                                 │
 │  ─────────────────────────────────────────                      │
-│  FIX received:            ~XX.XX FIX (minus 1%)                 │
+│  FIX reçus :              ~XX.XX FIX (moins 1%)                 │
 │                                                                 │
-│  Note: FIX network fees are paid by the bridge                  │
+│  Note : Les frais réseau FIX sont payés par le bridge           │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Summary table:
+### Tableau récapitulatif :
 
-| Fee | WRAP | UNWRAP |
-|-----|------|--------|
-| Bridge fee (token) | 1% FIX | 1% wFIX |
-| Bridge fee (BNB) | ~0.003 BNB | ~0.003 BNB |
-| FIX network fee | You | Bridge |
-| **Recommended BNB balance** | **~0.01 BNB** | **~0.01 BNB** |
+| Frais | WRAP | UNWRAP |
+|-------|------|--------|
+| Frais bridge (token) | 1% FIX | 1% wFIX |
+| Frais bridge (BNB) | ~0.003 BNB | ~0.003 BNB |
+| Frais réseau FIX | Vous | Bridge |
+| **Solde BNB recommandé** | **~0.01 BNB** | **~0.01 BNB** |
 
 ---
 
-## 🛡️ Security
+## 🛡️ Sécurité
 
-### Checks before using the bridge:
+### Vérifications avant d'utiliser le bridge :
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  ✅ SECURITY CHECKLIST                                          │
+│  ✅ LISTE DE CONTRÔLE SÉCURITÉ                                  │
 │                                                                 │
-│  □ Verify the wallet URL                                        │
-│  □ HTTPS connection (🔒 in address bar)                         │
-│  □ Double-check destination addresses                           │
-│  □ Start with a small test amount                               │
-│  □ Keep enough BNB for fees (~0.01 BNB recommended)             │
-│  □ NEVER share your private keys / seed / credentials           │
-│  □ Write down your credentials in a safe place                  │
+│  □ Vérifiez l'URL du wallet                                     │
+│  □ Connexion HTTPS (🔒 dans la barre d'adresse)                 │
+│  □ Double-vérifiez les adresses de destination                  │
+│  □ Commencez par un petit montant de test                       │
+│  □ Gardez assez de BNB (~0.01 BNB recommandé)                   │
+│  □ Ne partagez JAMAIS vos clés privées / seed / identifiants    │
+│  □ Notez vos identifiants dans un endroit sûr                   │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Official bridge addresses:
+### Adresses officielles du bridge :
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  🏦 OFFICIAL ADDRESSES                                          │
+│  🏦 ADRESSES OFFICIELLES                                        │
 │                                                                 │
-│  Bridge FIX (deposits):                                         │
+│  Bridge FIX (dépôts) :                                          │
 │  fix1qslft0rtt8lvq26u0z7cyypa6nl3kyl4ruv4q56                    │
 │                                                                 │
-│  wFIX Contract (BSC):                                           │
+│  Contrat wFIX (BSC) :                                           │
 │  0xA58DF40eA9423086ec47d19673F56faB47dB9F1D                      │
 │                                                                 │
-│  ⚠️ NEVER send FIX or wFIX to other addresses!                  │
+│  ⚠️ N'envoyez JAMAIS de FIX ou wFIX à d'autres adresses !       │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -889,112 +889,112 @@ Click **"📤 Send FIX (Step 2)"**
 
 ## ❓ FAQ
 
-### General questions
+### Questions générales
 
-**Q: Is the bridge decentralized?**
-> A: No, it's a custodial bridge managed by the FixedCoin team. FIX are held by the bridge and wFIX are minted/burned by a centralized daemon.
+**Q : Le bridge est-il décentralisé ?**
+> R : Non, c'est un bridge custodial géré par l'équipe FixedCoin. Les FIX sont détenus par le bridge et les wFIX sont mintés/brûlés par un daemon centralisé.
 
-**Q: What happens if the bridge goes down?**
-> A: Your FIX remain at the bridge address. Contact support for manual recovery.
+**Q : Que se passe-t-il si le bridge tombe en panne ?**
+> R : Vos FIX restent à l'adresse du bridge. Contactez le support pour une récupération manuelle.
 
-**Q: Can I cancel a transaction?**
-> A: No. Once the TX is sent, it's irreversible.
+**Q : Puis-je annuler une transaction ?**
+> R : Non. Une fois la TX envoyée, elle est irréversible.
 
-**Q: Why do I need ~0.003 BNB per operation?**
-> A: This BNB fee covers the bridge operator's gas costs on BSC. It's required before the bridge processes your transaction.
+**Q : Pourquoi ai-je besoin de ~0.003 BNB par opération ?**
+> R : Ce frais BNB couvre les coûts de gas BSC de l'opérateur du bridge. Il est requis avant que le bridge traite votre transaction.
 
-### Connection questions
+### Questions de connexion
 
-**Q: I forgot my email or password, how can I recover my wallet?**
-> A: Impossible. The wallet is derived locally, no data is stored. Always write down your seed phrase as backup.
+**Q : J'ai oublié mon email ou mot de passe, comment récupérer mon wallet ?**
+> R : Impossible. Le wallet est dérivé localement, aucune donnée n'est stockée. Notez toujours votre seed phrase comme sauvegarde.
 
-**Q: Does my 12-word seed generate the same addresses as my email+password?**
-> A: Yes, if the seed was generated by the email+password method. You can export your seed after connecting.
+**Q : Mon seed de 12 mots génère-t-il les mêmes adresses que mon email+mot de passe ?**
+> R : Oui, si le seed a été généré par la méthode email+mot de passe. Vous pouvez exporter votre seed après connexion.
 
-### WRAP questions
+### Questions WRAP
 
-**Q: Why 6 confirmations?**
-> A: To ensure the FIX transaction is final and prevent double-spends.
+**Q : Pourquoi 6 confirmations ?**
+> R : Pour s'assurer que la transaction FIX est finale et empêcher les double-dépenses.
 
-**Q: How long for 6 confirmations?**
-> A: Variable. FIX is a SHA-256 blockchain where time between blocks depends on network hashrate. It can take ~10-60 minutes.
+**Q : Combien de temps pour 6 confirmations ?**
+> R : Variable. FIX est une blockchain SHA-256 où le temps entre les blocs dépend du hashrate réseau. Cela peut prendre ~10-60 minutes.
 
-**Q: My TX is at 6/6 but no wFIX?**
-> A: The daemon processes TXs periodically. Wait a few minutes. If nothing after 1h, contact support.
+**Q : Ma TX est à 6/6 mais pas de wFIX ?**
+> R : Le daemon traite les TX périodiquement. Attendez quelques minutes. Si rien après 1h, contactez le support.
 
-### UNWRAP questions
+### Questions UNWRAP
 
-**Q: How long does unwrap take?**
-> A: The daemon sends FIX after detecting your burn. You can spend your FIX after just 1 network confirmation.
+**Q : Combien de temps prend l'unwrap ?**
+> R : Le daemon envoie les FIX après détection du burn. Vous pouvez dépenser vos FIX dès 1 confirmation réseau.
 
-**Q: Do I need to wait for 6 confirmations for unwrap?**
-> A: No! Unlike wrap, you can use your FIX after just 1 confirmation. The wallet displays your balance as soon as the TX is visible.
+**Q : Dois-je attendre 6 confirmations pour l'unwrap ?**
+> R : Non ! Contrairement au wrap, vous pouvez utiliser vos FIX dès 1 confirmation. Le wallet affiche le solde dès que la TX est visible.
 
-### Technical questions
+### Questions techniques
 
-**Q: Why "Insufficient funds" when I have enough?**
-> A: Fee calculation includes inputs + outputs + OP_RETURN. Use the **MAX** button to automatically calculate the exact amount.
+**Q : Pourquoi "Fonds insuffisants" alors que j'en ai assez ?**
+> R : Le calcul des frais inclut inputs + outputs + OP_RETURN. Utilisez le bouton **MAX** pour calculer automatiquement le montant exact.
 
-**Q: What's Bech32 vs Taproot?**
-> A: Two types of FIX addresses. Bech32 (`fix1q...`) is the standard SegWit. Taproot (`fix1p...`) is the new generation with slightly lower fees.
+**Q : Quelle est la différence entre Bech32 et Taproot ?**
+> R : Deux types d'adresses FIX. Bech32 (`fix1q...`) est le standard SegWit. Taproot (`fix1p...`) est la nouvelle génération avec des frais légèrement réduits.
 
 ---
 
-## 🔧 Troubleshooting
+## 🔧 Dépannage
 
-### Problem: "Insufficient funds"
+### Problème : "Fonds insuffisants"
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  ❌ Error: Insufficient funds after fees                        │
+│  ❌ Erreur : Fonds insuffisants après frais                     │
 ├─────────────────────────────────────────────────────────────────┤
-│  Solutions:                                                     │
-│  1. Click MAX to calculate the exact amount                     │
-│  2. Manually reduce the amount                                  │
-│  3. Check you've selected the right address                     │
-│     (Bech32 and Taproot have separate balances)                 │
+│  Solutions :                                                    │
+│  1. Cliquez sur MAX pour calculer le montant exact              │
+│  2. Réduisez manuellement le montant                            │
+│  3. Vérifiez que vous avez sélectionné la bonne adresse         │
+│     (Bech32 et Taproot ont des soldes séparés)                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Problem: "Insufficient BNB"
+### Problème : "BNB insuffisants"
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  ❌ Error: Insufficient BNB for bridge fees                     │
+│  ❌ Erreur : BNB insuffisants pour les frais bridge             │
 ├─────────────────────────────────────────────────────────────────┤
-│  Solutions:                                                     │
-│  1. Send BNB to your BSC address (0x...)                        │
-│  2. Recommended balance: ~0.01 BNB (for multiple operations)    │
-│  3. Each operation requires ~0.003 BNB                           │
-│  4. Buy BNB on an exchange (Binance, etc.)                      │
+│  Solutions :                                                    │
+│  1. Envoyez des BNB à votre adresse BSC (0x...)                 │
+│  2. Solde recommandé : ~0.01 BNB (pour plusieurs opérations)    │
+│  3. Chaque opération nécessite ~0.003 BNB                        │
+│  4. Achetez des BNB sur un exchange (Binance, etc.)             │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Problem: Stuck transaction
+### Problème : Transaction bloquée
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  ⏳ Transaction pending                                         │
+│  ⏳ Transaction en attente                                      │
 ├─────────────────────────────────────────────────────────────────┤
-│  • Click 🔄 to refresh status                                   │
-│  • Check the TX on FIX explorer                                 │
-│  • WRAP & UNWRAP both need ~10-60 min (6 confirmations)         │
-│  • If confirmed (6/6) but not completed after 1h → contact      │
-│    support                                                      │
+│  • Cliquez 🔄 pour rafraîchir le statut                         │
+│  • Vérifiez la TX sur l'explorateur FIX                         │
+│  • WRAP et UNWRAP nécessitent tous deux ~10-60 min (6 conf.)    │
+│  • Si confirmée (6/6) mais non complétée après 1h → contactez   │
+│    le support                                                   │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Problem: Page won't load
+### Problème : La page ne charge pas
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  ❌ Blank page or error                                         │
+│  ❌ Page blanche ou erreur                                      │
 ├─────────────────────────────────────────────────────────────────┤
-│  Solutions:                                                     │
-│  1. Clear cache: Ctrl+Shift+R (Cmd+Shift+R on Mac)              │
-│  2. Try another browser (Chrome, Firefox, Brave)                │
-│  3. Disable extensions (AdBlock, etc.)                          │
-│  4. Check your internet connection                              │
+│  Solutions :                                                    │
+│  1. Videz le cache : Ctrl+Shift+R (Cmd+Shift+R sur Mac)         │
+│  2. Essayez un autre navigateur (Chrome, Firefox, Brave)        │
+│  3. Désactivez les extensions (AdBlock, etc.)                   │
+│  4. Vérifiez votre connexion internet                           │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -1005,36 +1005,36 @@ Click **"📤 Send FIX (Step 2)"**
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  💬 Discord: https://discord.gg/e3rNt3JYSh                      │
-│  📱 Telegram: https://t.me/fixedcoin10000                       │
-│  📝 Forum: https://bitcointalk.org/index.php?topic=5562505      │
+│  💬 Discord : https://discord.gg/e3rNt3JYSh                     │
+│  📱 Telegram : https://t.me/fixedcoin10000                      │
+│  📝 Forum : https://bitcointalk.org/index.php?topic=5562505     │
 │                                                                 │
-│  When contacting support, provide:                              │
-│  • Your TXID (transaction hash)                                 │
-│  • Your FIX and BSC addresses                                   │
-│  • The amount involved                                          │
-│  • A screenshot of the error                                    │
+│  Lors du contact avec le support, fournissez :                  │
+│  • Votre TXID (hash de transaction)                             │
+│  • Vos adresses FIX et BSC                                      │
+│  • Le montant concerné                                          │
+│  • Une capture d'écran de l'erreur                              │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🔗 Useful Links
+## 🔗 Liens Utiles
 
-| Resource | Link |
-|----------|------|
-| FIX Explorer | https://explorer.fixedcoin.org |
-| BSC Explorer | https://bscscan.com |
-| wFIX Contract | https://bscscan.com/token/0xA58DF40eA9423086ec47d19673F56faB47dB9F1D |
-| wFIX/BNB Chart | https://dexscreener.com/bsc/0x3ba18136e1c1dd24bedf022ae282b09187529704 |
-| wFIX/wBTC Chart | https://dexscreener.com/bsc/0xee31f8490b4304e175c41d5bcae99c47bac93026 |
-| Trade on PancakeSwap | https://pancakeswap.finance/swap?outputCurrency=0xA58DF40eA9423086ec47d19673F56faB47dB9F1D |
+| Ressource | Lien |
+|-----------|------|
+| Explorateur FIX | https://explorer.fixedcoin.org |
+| Explorateur BSC | https://bscscan.com |
+| Contrat wFIX | https://bscscan.com/token/0xA58DF40eA9423086ec47d19673F56faB47dB9F1D |
+| Graphique wFIX/BNB | https://dexscreener.com/bsc/0x3ba18136e1c1dd24bedf022ae282b09187529704 |
+| Graphique wFIX/wBTC | https://dexscreener.com/bsc/0xee31f8490b4304e175c41d5bcae99c47bac93026 |
+| Trader sur PancakeSwap | https://pancakeswap.finance/swap?outputCurrency=0xA58DF40eA9423086ec47d19673F56faB47dB9F1D |
 | Whitepaper | https://github.com/Fixed-Blockchain/FixedCoin_Whitepaper/blob/main/FixedCoin_Whitepaper.pdf |
 | Halving Live | https://halving.fixedcoin.org/ |
-| Blockchain Stats | https://miningpoolstats.stream/fixedcoin |
+| Stats Blockchain | https://miningpoolstats.stream/fixedcoin |
 
 ---
 
-*Guide v2.0 - December 2025*
-*FIX/wFIX Bridge - FixedCoin*
+*Guide v2.0 - Décembre 2025*
+*Bridge FIX/wFIX - FixedCoin*
