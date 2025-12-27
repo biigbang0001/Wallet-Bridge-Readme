@@ -1,6 +1,6 @@
 # 🌉 FIX/wFIX Bridge - Complete User Guide
 
-## ⚡ Quick Start (TL;DR)
+## ⚡ Quick Start 
 
 1. **Connect wallet** (email+password or seed phrase)
 2. **Have BNB ready** (~0.01 BNB recommended for multiple operations)
