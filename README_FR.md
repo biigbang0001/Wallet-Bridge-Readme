@@ -1,6 +1,6 @@
 # 🌉 Bridge FIX/wFIX - Guide Utilisateur Complet
 
-## ⚡ Démarrage Rapide (TL;DR)
+## ⚡ Démarrage Rapide 
 
 1. **Connectez votre wallet** (email+mot de passe ou seed phrase)
 2. **Ayez des BNB prêts** (~0.01 BNB recommandé pour plusieurs opérations)
