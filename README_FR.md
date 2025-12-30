@@ -9,9 +9,19 @@
 
 | Opération | Durée | Frais |
 |-----------|-------|-------|
-| WRAP (FIX → wFIX) | ~10-60 min (6 conf.) | 1% FIX + ~0.003 BNB |
-| UNWRAP (wFIX → FIX) | Plus rapide (1 conf. pour dépenser) | 1% wFIX + ~0.003 BNB |
+| WRAP (FIX → wFIX) | ~10-200 min (selon montant) | 1% FIX + ~0.003 BNB |
+| UNWRAP (wFIX → FIX) | ~10-200 min (selon montant) | 1% wFIX + ~0.003 BNB |
 | Trade sur DEX | ~3 secondes | ~0.1% |
+
+### ⏱️ Confirmations selon le montant
+
+| Montant | Confirmations | Durée estimée |
+|---------|---------------|---------------|
+| < 100 FIX | 6 confirmations | ~10-60 min |
+| 100 - 1000 FIX | 12 confirmations | ~20-120 min |
+| > 1000 FIX | 20 confirmations | ~30-200 min |
+
+> 💡 Plus le montant est élevé, plus le bridge attend de confirmations pour garantir la sécurité de la transaction.
 
 ---
 
@@ -65,7 +75,7 @@ Le Bridge est un lien bidirectionnel entre deux blockchains :
 │                     │                      │                     │
 │  • Blockchain FIX   │                      │  • Binance Smart    │
 │  • SHA-256 PoW      │                      │    Chain (BEP-20)   │
-│  • 6 confirmations  │   ◄════════════════  │  • ~3 sec/bloc      │
+│  • 6/12/20 conf.    │   ◄════════════════  │  • ~3 sec/bloc      │
 │  • Minage           │       UNWRAP         │  • Smart Contracts  │
 │                     │                      │                     │
 └─────────────────────┘                      └─────────────────────┘
@@ -86,7 +96,7 @@ Le Bridge est un lien bidirectionnel entre deux blockchains :
 **WRAP (FIX → wFIX) :**
 1. Vous payez les frais du bridge (~0.003 BNB)
 2. Vous envoyez vos FIX à l'adresse du bridge
-3. Le bridge vérifie la transaction (6 confirmations)
+3. Le bridge vérifie la transaction (6/12/20 confirmations selon le montant)
 4. Le daemon mint des wFIX équivalents sur BSC
 5. Les wFIX arrivent à votre adresse BSC
 
@@ -95,7 +105,7 @@ Le Bridge est un lien bidirectionnel entre deux blockchains :
 2. Vous brûlez vos wFIX via le smart contract
 3. Le bridge détecte le burn
 4. Le daemon envoie des FIX natifs depuis sa réserve
-5. Après 6 confirmations FIX, l'unwrap est complet
+5. Après les confirmations requises, l'unwrap est complet
 
 ---
 
@@ -251,7 +261,7 @@ Email + Mot de passe
         ▼
    Clé Maître (xprv)
         │
-        ├──► Adresse Bech32   (m/84'/0'/0'/0/0) ← Bech32 consomme automatiquement les UTXOs Legacy et P2SH possédés sur le compte HD
+        ├──► Adresse Bech32   (m/84'/0'/0'/0/0)
         ├──► Adresse Taproot  (m/86'/0'/0'/0/0)
         └──► Adresse BSC      (m/44'/60'/0'/0/0)
 ```
@@ -335,10 +345,6 @@ Après connexion avec une méthode HD (email, seed, xprv), vous avez accès à *
 └────────────────────────────────────────────────────────────────┘
 ```
 
-### Note sur les formats legacy (Legacy, P2SH) :
-
-> Si vous avez des UTXOs sur des adresses Legacy ou P2SH, ils seront automatiquement dépensés via votre adresse Bech32. Le wallet gère cela de manière transparente.
-
 ### Quelle adresse utiliser ?
 
 | Usage | Adresse recommandée |
@@ -368,6 +374,29 @@ Cliquez sur **📋** pour copier une adresse :
 
 **Convertissez vos FIX natifs en wFIX sur Binance Smart Chain**
 
+### ⏱️ Confirmations requises selon le montant
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                                                                 │
+│  📊 CONFIRMATIONS DYNAMIQUES                                    │
+│                                                                 │
+│  Le nombre de confirmations dépend du montant :                 │
+│                                                                 │
+│  ┌─────────────────┬──────────────────┬───────────────────┐     │
+│  │    Montant      │  Confirmations   │  Durée estimée    │     │
+│  ├─────────────────┼──────────────────┼───────────────────┤     │
+│  │   < 100 FIX     │        6         │   ~10-60 min      │     │
+│  │  100-1000 FIX   │       12         │   ~20-120 min     │     │
+│  │   > 1000 FIX    │       20         │   ~30-200 min     │     │
+│  └─────────────────┴──────────────────┴───────────────────┘     │
+│                                                                 │
+│  💡 Plus le montant est important, plus la sécurité est         │
+│     renforcée avec davantage de confirmations.                  │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
 ### Aperçu du processus :
 
 ```
@@ -386,7 +415,7 @@ Cliquez sur **📋** pour copier une adresse :
 │   └─────────┘              │ Address │                          │
 │                            └─────────┘                          │
 │                                 │                               │
-│                                 │ 6 confirmations               │
+│                                 │ 6/12/20 confirmations         │
 │                                 ▼                               │
 │                            ┌─────────┐         ┌─────────┐      │
 │                            │  Daemon │ ──────► │  wFIX   │      │
@@ -429,14 +458,6 @@ Cliquez sur **📋** pour copier une adresse :
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-**Différence Bech32 vs Taproot :**
-
-| Caractéristique | Bech32 | Taproot |
-|-----------------|--------|---------|
-| Préfixe | `fix1q...` | `fix1p...` |
-| Type | Native SegWit (P2WPKH) | P2TR |
-| Frais TX | ~68 vbytes/input | ~58 vbytes/input |
-
 #### Étape 3 : Entrez l'adresse BSC de destination
 
 ```
@@ -465,6 +486,7 @@ Cliquez sur **📋** pour copier une adresse :
 │  └───────────────────────────────────────────────────┘  └─────┘ │
 │                                                                 │
 │  Vous recevez : ~XX.XXXXXXXX wFIX (- 1% frais)                  │
+│  Confirmations requises : 6 (< 100 FIX)                         │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -495,7 +517,7 @@ Cliquez sur **"🚀 PRÉPARER WRAP"**
 │                                                                 │
 │  ÉTAPE 1/2 : PAYER LES FRAIS BRIDGE                             │
 │  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━                               │
-│  Envoyer : ~0.003 BNB (frais bridge)                             │
+│  Envoyer : ~0.003 BNB (frais bridge)                            │
 │  Vers : Adresse master du bridge                                │
 │                                                                 │
 │  ÉTAPE 2/2 : ENVOYER FIX AU BRIDGE                              │
@@ -504,25 +526,10 @@ Cliquez sur **"🚀 PRÉPARER WRAP"**
 │  Vers : Adresse de dépôt du bridge                              │
 │  OP_RETURN : [Votre adresse BSC encodée]                        │
 │  Frais (1%) : X.XXXXXXXX FIX                                    │
+│  Confirmations : 6 (montant < 100 FIX)                          │
 │  Vous recevez : ~XX.XXXXXXXX wFIX                               │
 │                                                                 │
 │                  [💰 Payer les Frais (Étape 1)]                 │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-**Qu'est-ce que OP_RETURN ?**
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│  OP_RETURN = Données intégrées dans la transaction FIX          │
-│                                                                 │
-│  Contient : Votre adresse BSC de destination                    │
-│  But : Le daemon sait où envoyer vos wFIX                       │
-│  Taille : ~45 bytes                                             │
-│                                                                 │
-│  Sans OP_RETURN, le daemon ne saurait pas quelle adresse        │
-│  BSC créditer !                                                 │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -555,6 +562,7 @@ Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 │  TX : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx          │
 │                                                                 │
 │  ⏳ En attente de 6 confirmations sur la blockchain FIX...      │
+│     (montant < 100 FIX)                                         │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -570,30 +578,41 @@ Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 │                                                                 │
 │  ┌───────────────────────────────────────────────────────────┐  │
 │  │  📝 xxxxxxxx...                                    ⬜ 3/6   │  │
-│  │     XX.XXXXXXXX FIX → wFIX                                │  │
+│  │     50 FIX → wFIX                                         │  │
 │  │     🔄 Confirmation sur blockchain FIX                    │  │
 │  │                                                           │  │
 │  │     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  50%                   │  │
 │  └───────────────────────────────────────────────────────────┘  │
 │                                                                 │
+│  ┌───────────────────────────────────────────────────────────┐  │
+│  │  📝 yyyyyyyy...                                   ⬜ 8/12   │  │
+│  │     500 FIX → wFIX                                        │  │
+│  │     🔄 Confirmation sur blockchain FIX                    │  │
+│  │                                                           │  │
+│  │     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  67%                   │  │
+│  └───────────────────────────────────────────────────────────┘  │
+│                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-**Pourquoi 6 confirmations ?**
+**Pourquoi des confirmations variables ?**
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  Le bridge attend 6 confirmations pour s'assurer que la         │
-│  transaction est finale et irréversible.                        │
+│  Le bridge adapte la sécurité au montant transféré :            │
+│                                                                 │
+│  • Petit montant (< 100 FIX) → 6 confirmations                  │
+│    Risque faible, traitement rapide                             │
+│                                                                 │
+│  • Montant moyen (100-1000 FIX) → 12 confirmations              │
+│    Sécurité renforcée                                           │
+│                                                                 │
+│  • Gros montant (> 1000 FIX) → 20 confirmations                 │
+│    Sécurité maximale contre les réorganisations                 │
 │                                                                 │
 │  ⚠️ FIX est une blockchain SHA-256 (comme Bitcoin).             │
 │     Le temps entre les blocs VARIE selon le hashrate réseau.    │
-│     Ce n'est PAS un temps fixe.                                 │
-│                                                                 │
-│  En moyenne : ~10-60 minutes selon le réseau                    │
-│                                                                 │
-│  Confirmation 0/6 → 1/6 → 2/6 → 3/6 → 4/6 → 5/6 → 6/6 → ✅ MINT │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -603,6 +622,16 @@ Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 ## 🟡 UNWRAP : wFIX → FIX
 
 **Convertissez vos wFIX en FIX natifs**
+
+### ⏱️ Confirmations requises selon le montant
+
+Le même système de confirmations dynamiques s'applique à l'UNWRAP :
+
+| Montant | Confirmations | Durée estimée |
+|---------|---------------|---------------|
+| < 100 wFIX | 6 confirmations | ~10-60 min |
+| 100 - 1000 wFIX | 12 confirmations | ~20-120 min |
+| > 1000 wFIX | 20 confirmations | ~30-200 min |
 
 ### Aperçu :
 
@@ -629,7 +658,7 @@ Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 │                            │ (Envoi) │         │  (Vous) │      │
 │                            └─────────┘         └─────────┘      │
 │                                 │                               │
-│                                 │ 6 confirmations               │
+│                                 │ 6/12/20 confirmations         │
 │                                 ▼                               │
 │                            ┌─────────┐                          │
 │                            │    ✅   │  Terminé !               │
@@ -676,6 +705,7 @@ Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 │  └───────────────────────────────────────────────────┘  └─────┘ │
 │                                                                 │
 │  Vous recevez : ~X.XXXXXXXX FIX (- 1% frais)                    │
+│  Confirmations requises : 6 (< 100 wFIX)                        │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -687,9 +717,10 @@ Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 │  RÉSUMÉ UNWRAP                                                  │
 │  ━━━━━━━━━━━━━                                                  │
 │                                                                 │
-│  Frais bridge : ~0.003 BNB                                       │
+│  Frais bridge : ~0.003 BNB                                      │
 │  Burn : X.XXXXXXXX wFIX                                         │
 │  Frais (1%) : X.XXXXXXXX wFIX                                   │
+│  Confirmations : 6 (montant < 100 wFIX)                         │
 │  ─────────────────────                                          │
 │  Vous recevez : ~X.XXXXXXXX FIX                                 │
 │  Vers : fix1q...                                                │
@@ -708,7 +739,7 @@ Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 │  TX : 0x...                                                     │
 │                                                                 │
 │  ⏳ Le daemon va envoyer vos FIX sous peu...                    │
-│     Puis attendez 6 confirmations FIX.                          │
+│     Puis attendez les confirmations FIX requises.               │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -729,7 +760,13 @@ Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 │                                                                 │
 │  ┌───────────────────────────────────────────────────────────┐  │
 │  │  📝 xxxxxxxx...                                    ⬜ 4/6   │  │
-│  │     XX.XX FIX → wFIX                                      │  │
+│  │     50 FIX → wFIX                                         │  │
+│  │     🔄 Confirmation sur blockchain FIX                    │  │
+│  └───────────────────────────────────────────────────────────┘  │
+│                                                                 │
+│  ┌───────────────────────────────────────────────────────────┐  │
+│  │  📝 yyyyyyyy...                                  ⬜ 15/20   │  │
+│  │     1500 FIX → wFIX                                       │  │
 │  │     🔄 Confirmation sur blockchain FIX                    │  │
 │  └───────────────────────────────────────────────────────────┘  │
 │                                                                 │
@@ -737,8 +774,8 @@ Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 │  ─────────────────────                                          │
 │                                                                 │
 │  ┌───────────────────────────────────────────────────────────┐  │
-│  │  📝 0x...                                          ⬜ 2/6   │  │
-│  │     X.XX wFIX → FIX                                       │  │
+│  │  📝 0x...                                         ⬜ 8/12   │  │
+│  │     200 wFIX → FIX                                        │  │
 │  │     🔄 Confirmation sur blockchain FIX                    │  │
 │  └───────────────────────────────────────────────────────────┘  │
 │                                                                 │
@@ -749,12 +786,11 @@ Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 
 | État | Icône | Description |
 |------|-------|-------------|
-| Mempool | ⬜ 0/6 | TX envoyée, pas encore minée |
-| En confirmation | ⬜ 1-5/6 | En attente de confirmations |
-| Prête | ⬜ 6/6 | Prête pour traitement |
+| Mempool | ⬜ 0/X | TX envoyée, pas encore minée |
+| En confirmation | ⬜ 1-X/X | En attente de confirmations |
+| Prête | ⬜ X/X | Prête pour traitement |
 | En traitement | ⏳ | Daemon traite la TX |
 | Terminée | ✅ | Complétée avec succès |
-| Échouée | ❌ | Erreur (voir détails) |
 
 ---
 
@@ -770,7 +806,7 @@ Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 │  ┌───────────────────────────────────────────────────────────┐  │
 │  │  Frais Bridge (BNB)                                       │  │
 │  │  ──────────────────                                       │  │
-│  │  • ~0.003 BNB par opération (WRAP ou UNWRAP)               │  │
+│  │  • ~0.003 BNB par opération (WRAP ou UNWRAP)              │  │
 │  │  • Payé à l'opérateur du bridge pour couvrir le gas BSC   │  │
 │  │  • Requis AVANT que la transaction soit traitée           │  │
 │  └───────────────────────────────────────────────────────────┘  │
@@ -789,49 +825,6 @@ Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 │  │  • Réseau FIX : payé par vous au WRAP (minimal)           │  │
 │  │  • Réseau FIX : payé par le bridge au UNWRAP              │  │
 │  └───────────────────────────────────────────────────────────┘  │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-### WRAP (FIX → wFIX)
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                                                                 │
-│  Vous envoyez :          XX.XXXXXXXX FIX                        │
-│                                                                 │
-│  1. Frais réseau FIX     - quelques satoshis (vous payez)       │
-│     └─ Payé aux mineurs FIX                                     │
-│                                                                 │
-│  2. Frais bridge         - 1% du montant FIX                    │
-│     └─ Va à l'opérateur du bridge                               │
-│                                                                 │
-│  3. Frais BNB bridge     - ~0.003 BNB                            │
-│     └─ Couvre les coûts de gas BSC pour le mint                 │
-│                                                                 │
-│  ─────────────────────────────────────────                      │
-│  wFIX reçus :             ~XX.XX wFIX (moins 1%)                │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-### UNWRAP (wFIX → FIX)
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                                                                 │
-│  Vous brûlez :           XX.XXXXXXXX wFIX                       │
-│                                                                 │
-│  1. Frais bridge         - 1% du montant wFIX                   │
-│     └─ Déduit du montant envoyé                                 │
-│                                                                 │
-│  2. Frais BNB bridge     - ~0.003 BNB                            │
-│     └─ Couvre les coûts de traitement                           │
-│                                                                 │
-│  ─────────────────────────────────────────                      │
-│  FIX reçus :              ~XX.XX FIX (moins 1%)                 │
-│                                                                 │
-│  Note : Les frais réseau FIX sont payés par le bridge           │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -895,10 +888,7 @@ Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 > R : Non, c'est un bridge custodial géré par l'équipe FixedCoin. Les FIX sont détenus par le bridge et les wFIX sont mintés/brûlés par un daemon centralisé.
 
 **Q : Que se passe-t-il si le bridge tombe en panne ?**
-> R : Vos FIX restent à l'adresse du bridge. Contactez le support pour une récupération manuelle.
-
-**Q : Puis-je annuler une transaction ?**
-> R : Non. Une fois la TX envoyée, elle est irréversible.
+> R : Vos FIX restent à l'adresse du bridge. Contactez le support pour assistance.
 
 **Q : Pourquoi ai-je besoin de ~0.003 BNB par opération ?**
 > R : Ce frais BNB couvre les coûts de gas BSC de l'opérateur du bridge. Il est requis avant que le bridge traite votre transaction.
@@ -911,24 +901,19 @@ Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 **Q : Mon seed de 12 mots génère-t-il les mêmes adresses que mon email+mot de passe ?**
 > R : Oui, si le seed a été généré par la méthode email+mot de passe. Vous pouvez exporter votre seed après connexion.
 
-### Questions WRAP
+### Questions sur les confirmations
 
-**Q : Pourquoi 6 confirmations ?**
-> R : Pour s'assurer que la transaction FIX est finale et empêcher les double-dépenses.
+**Q : Pourquoi le nombre de confirmations varie ?**
+> R : Le bridge adapte la sécurité au montant transféré. Plus le montant est élevé, plus il faut de confirmations pour garantir l'irréversibilité de la transaction.
 
-**Q : Combien de temps pour 6 confirmations ?**
-> R : Variable. FIX est une blockchain SHA-256 où le temps entre les blocs dépend du hashrate réseau. Cela peut prendre ~10-60 minutes.
+**Q : Combien de temps pour les confirmations ?**
+> R : Variable. FIX est une blockchain SHA-256 où le temps entre les blocs dépend du hashrate réseau :
+> - 6 conf. : ~10-60 minutes
+> - 12 conf. : ~20-120 minutes  
+> - 20 conf. : ~30-200 minutes
 
-**Q : Ma TX est à 6/6 mais pas de wFIX ?**
+**Q : Ma TX a atteint le nombre de confirmations requis mais pas de wFIX ?**
 > R : Le daemon traite les TX périodiquement. Attendez quelques minutes. Si rien après 1h, contactez le support.
-
-### Questions UNWRAP
-
-**Q : Combien de temps prend l'unwrap ?**
-> R : Le daemon envoie les FIX après détection du burn. Vous pouvez dépenser vos FIX dès 1 confirmation réseau.
-
-**Q : Dois-je attendre 6 confirmations pour l'unwrap ?**
-> R : Non ! Contrairement au wrap, vous pouvez utiliser vos FIX dès 1 confirmation. Le wallet affiche le solde dès que la TX est visible.
 
 ### Questions techniques
 
@@ -965,12 +950,12 @@ Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 │  Solutions :                                                    │
 │  1. Envoyez des BNB à votre adresse BSC (0x...)                 │
 │  2. Solde recommandé : ~0.01 BNB (pour plusieurs opérations)    │
-│  3. Chaque opération nécessite ~0.003 BNB                        │
+│  3. Chaque opération nécessite ~0.003 BNB                       │
 │  4. Achetez des BNB sur un exchange (Binance, etc.)             │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Problème : Transaction bloquée
+### Problème : Transaction en attente
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -978,8 +963,11 @@ Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 ├─────────────────────────────────────────────────────────────────┤
 │  • Cliquez 🔄 pour rafraîchir le statut                         │
 │  • Vérifiez la TX sur l'explorateur FIX                         │
-│  • WRAP et UNWRAP nécessitent tous deux ~10-60 min (6 conf.)    │
-│  • Si confirmée (6/6) mais non complétée après 1h → contactez   │
+│  • Durée selon le montant :                                     │
+│    - < 100 FIX : ~10-60 min (6 conf.)                           │
+│    - 100-1000 FIX : ~20-120 min (12 conf.)                      │
+│    - > 1000 FIX : ~30-200 min (20 conf.)                        │
+│  • Si confirmée mais non complétée après 1h → contactez         │
 │    le support                                                   │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -1036,5 +1024,5 @@ Cliquez sur **"📤 Envoyer FIX (Étape 2)"**
 
 ---
 
-*Guide v2.0 - Décembre 2025*
+*Guide v2.1 - Décembre 2025*
 *Bridge FIX/wFIX - FixedCoin*
