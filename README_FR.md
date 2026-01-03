@@ -10,7 +10,7 @@
 | Opération | Durée | Frais |
 |-----------|-------|-------|
 | WRAP (FIX → wFIX) | ~10-200 min (selon montant) | 1% FIX + ~0.003 BNB |
-| UNWRAP (wFIX → FIX) | ~10-200 min (selon montant) | 1 %FIX + ~0.003 BNB |
+| UNWRAP (wFIX → FIX) | ~10-200 min (selon montant) | 1% FIX + ~0.003 BNB |
 | Trade sur DEX | ~3 secondes | ~0.1% |
 
 ### ⏱️ Confirmations selon le montant
@@ -32,6 +32,7 @@ Vos wFIX peuvent être échangés instantanément sur PancakeSwap :
 | Paire | Trader | Graphique |
 |-------|--------|-----------|
 | wFIX/BNB | [PancakeSwap](https://pancakeswap.finance/swap?outputCurrency=0xA58DF40eA9423086ec47d19673F56faB47dB9F1D&chain=bsc) | [DexScreener](https://dexscreener.com/bsc/0xee31f8490b4304e175c41d5bcae99c47bac93026) |
+| wFIX/USDT | [PancakeSwap](https://pancakeswap.finance/swap?outputCurrency=0xA58DF40eA9423086ec47d19673F56faB47dB9F1D&inputCurrency=0x55d398326f99059fF775485246999027B3197955&chain=bsc) | [DexScreener](https://dexscreener.com/bsc/0x32656c92f07e9b1322750797859f5c0bf551b6e6) |
 | wFIX/wBTC | [PancakeSwap](https://pancakeswap.finance/swap?outputCurrency=0xA58DF40eA9423086ec47d19673F56faB47dB9F1D&inputCurrency=0x0555E30da8f98308EdB960aa94C0Db47230d2B9c) | [DexScreener](https://dexscreener.com/bsc/0x3ba18136e1c1dd24bedf022ae282b09187529704) |
 
 ### 🦊 Ajouter wFIX à MetaMask
@@ -816,7 +817,7 @@ Le même système de confirmations dynamiques s'applique à l'UNWRAP :
 │  │  ────────────────────                                     │  │
 │  │  • 1% du montant de la transaction                        │  │
 │  │  • WRAP : 1% déduit en FIX                                │  │
-│  │  • UNWRAP : 1% déduit en wFIX                             │  │
+│  │  • UNWRAP : 1% déduit en FIX                              │  │
 │  └───────────────────────────────────────────────────────────┘  │
 │                                                                 │
 │  ┌───────────────────────────────────────────────────────────┐  │
@@ -833,7 +834,7 @@ Le même système de confirmations dynamiques s'applique à l'UNWRAP :
 
 | Frais | WRAP | UNWRAP |
 |-------|------|--------|
-| Frais bridge (token) | 1% FIX | 1% wFIX |
+| Frais bridge (token) | 1% FIX | 1% FIX |
 | Frais bridge (BNB) | ~0.003 BNB | ~0.003 BNB |
 | Frais réseau FIX | Vous | Bridge |
 | **Solde BNB recommandé** | **~0.01 BNB** | **~0.01 BNB** |
@@ -1016,6 +1017,7 @@ Le même système de confirmations dynamiques s'applique à l'UNWRAP :
 | Explorateur BSC | https://bscscan.com |
 | Contrat wFIX | https://bscscan.com/token/0xA58DF40eA9423086ec47d19673F56faB47dB9F1D |
 | Graphique wFIX/BNB | https://dexscreener.com/bsc/0xee31f8490b4304e175c41d5bcae99c47bac93026 |
+| Graphique wFIX/USDT | https://dexscreener.com/bsc/0x32656c92f07e9b1322750797859f5c0bf551b6e6 |
 | Graphique wFIX/wBTC | https://dexscreener.com/bsc/0x3ba18136e1c1dd24bedf022ae282b09187529704 |
 | Trader sur PancakeSwap | https://pancakeswap.finance/swap?outputCurrency=0xA58DF40eA9423086ec47d19673F56faB47dB9F1D&chain=bsc |
 | Whitepaper | https://github.com/Fixed-Blockchain/FixedCoin_Whitepaper/blob/main/FixedCoin_Whitepaper.pdf |
@@ -1024,5 +1026,5 @@ Le même système de confirmations dynamiques s'applique à l'UNWRAP :
 
 ---
 
-*Guide v2.1 - Décembre 2025*
+*Guide v2.2 - Janvier 2026*
 *Bridge FIX/wFIX - FixedCoin*

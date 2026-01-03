@@ -32,6 +32,7 @@ Your wFIX can be traded instantly on PancakeSwap:
 | Pair | Trade | Chart |
 |------|-------|-------|
 | wFIX/BNB | [PancakeSwap](https://pancakeswap.finance/swap?outputCurrency=0xA58DF40eA9423086ec47d19673F56faB47dB9F1D&chain=bsc) | [DexScreener](https://dexscreener.com/bsc/0xee31f8490b4304e175c41d5bcae99c47bac93026) |
+| wFIX/USDT | [PancakeSwap](https://pancakeswap.finance/swap?outputCurrency=0xA58DF40eA9423086ec47d19673F56faB47dB9F1D&inputCurrency=0x55d398326f99059fF775485246999027B3197955&chain=bsc) | [DexScreener](https://dexscreener.com/bsc/0x32656c92f07e9b1322750797859f5c0bf551b6e6) |
 | wFIX/wBTC | [PancakeSwap](https://pancakeswap.finance/swap?outputCurrency=0xA58DF40eA9423086ec47d19673F56faB47dB9F1D&inputCurrency=0x0555E30da8f98308EdB960aa94C0Db47230d2B9c) | [DexScreener](https://dexscreener.com/bsc/0x3ba18136e1c1dd24bedf022ae282b09187529704) |
 
 ### 🦊 Add wFIX to MetaMask
@@ -816,7 +817,7 @@ The same dynamic confirmation system applies to UNWRAP:
 │  │  ──────────────────                                       │  │
 │  │  • 1% of the amount transacted                            │  │
 │  │  • WRAP: 1% deducted in FIX                               │  │
-│  │  • UNWRAP: 1% deducted in wFIX                            │  │
+│  │  • UNWRAP: 1% deducted in FIX                                │  │
 │  └───────────────────────────────────────────────────────────┘  │
 │                                                                 │
 │  ┌───────────────────────────────────────────────────────────┐  │
@@ -833,7 +834,7 @@ The same dynamic confirmation system applies to UNWRAP:
 
 | Fee | WRAP | UNWRAP |
 |-----|------|--------|
-| Bridge fee (token) | 1% FIX | 1% wFIX |
+| Bridge fee (token) | 1% FIX | 1% FIX |
 | Bridge fee (BNB) | ~0.003 BNB | ~0.003 BNB |
 | FIX network fee | You | Bridge |
 | **Recommended BNB balance** | **~0.01 BNB** | **~0.01 BNB** |
@@ -1015,6 +1016,7 @@ The same dynamic confirmation system applies to UNWRAP:
 | BSC Explorer | https://bscscan.com |
 | wFIX Contract | https://bscscan.com/token/0xA58DF40eA9423086ec47d19673F56faB47dB9F1D |
 | wFIX/BNB Chart | https://dexscreener.com/bsc/0xee31f8490b4304e175c41d5bcae99c47bac93026 |
+| wFIX/USDT Chart | https://dexscreener.com/bsc/0x32656c92f07e9b1322750797859f5c0bf551b6e6 |
 | wFIX/wBTC Chart | https://dexscreener.com/bsc/0x3ba18136e1c1dd24bedf022ae282b09187529704 |
 | Trade on PancakeSwap | https://pancakeswap.finance/swap?outputCurrency=0xA58DF40eA9423086ec47d19673F56faB47dB9F1D&chain=bsc |
 | Whitepaper | https://github.com/Fixed-Blockchain/FixedCoin_Whitepaper/blob/main/FixedCoin_Whitepaper.pdf |
@@ -1023,5 +1025,5 @@ The same dynamic confirmation system applies to UNWRAP:
 
 ---
 
-*Guide v2.1 - December 2025*
+*Guide v2.2 - January 2026*
 *FIX/wFIX Bridge - FixedCoin*
