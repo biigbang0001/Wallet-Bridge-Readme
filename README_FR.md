@@ -10,7 +10,7 @@
 | Opération | Durée | Frais |
 |-----------|-------|-------|
 | WRAP (FIX → wFIX) | ~10-200 min (selon montant) | 1% FIX + ~0.003 BNB |
-| UNWRAP (wFIX → FIX) | ~10-200 min (selon montant) | 1% wFIX + ~0.003 BNB |
+| UNWRAP (wFIX → FIX) | ~10-200 min (selon montant) | 1%FIX + ~0.003 BNB |
 | Trade sur DEX | ~3 secondes | ~0.1% |
 
 ### ⏱️ Confirmations selon le montant
